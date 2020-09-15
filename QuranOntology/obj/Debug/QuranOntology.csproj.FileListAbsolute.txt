@@ -1,0 +1,110 @@
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\QuranOntology.dll.config
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\QuranOntology.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\QuranOntology.pdb
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Antlr3.Runtime.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\EntityFramework.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\EntityFramework.SqlServer.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.Core.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.Owin.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Host.SystemWeb.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Cookies.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Facebook.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Google.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.OAuth.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Twitter.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Web.Infrastructure.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Newtonsoft.Json.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Owin.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.Helpers.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.Mvc.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.Optimization.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.Razor.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.WebPages.Deployment.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.WebPages.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.WebPages.Razor.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\WebGrease.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.Helpers.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.Mvc.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.Optimization.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.Razor.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.WebPages.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.WebPages.Deployment.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\System.Web.WebPages.Razor.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Newtonsoft.Json.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Antlr3.Runtime.pdb
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\EntityFramework.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\EntityFramework.SqlServer.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.Core.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.Owin.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Host.SystemWeb.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Facebook.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Cookies.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.OAuth.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Google.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Twitter.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\obj\Debug\QuranOntology.csprojResolveAssemblyReference.cache
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\obj\Debug\QuranOntology.dll
+c:\users\raheel\documents\visual studio 2013\Projects\QuranOntology\QuranOntology\obj\Debug\QuranOntology.pdb
+D:\QuranOntology\QuranOntology\QuranOntology\obj\Debug\QuranOntology.csprojResolveAssemblyReference.cache
+D:\QuranOntology\QuranOntology\QuranOntology\bin\QuranOntology.dll.config
+D:\QuranOntology\QuranOntology\QuranOntology\bin\QuranOntology.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\QuranOntology.pdb
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Antlr3.Runtime.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\EntityFramework.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\EntityFramework.SqlServer.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.Core.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Cookies.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Facebook.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Google.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.OAuth.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Twitter.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Web.Infrastructure.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Newtonsoft.Json.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Owin.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.Helpers.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.Mvc.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.Optimization.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.Razor.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.WebPages.Deployment.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.WebPages.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.WebPages.Razor.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\WebGrease.dll
+D:\QuranOntology\QuranOntology\QuranOntology\bin\EntityFramework.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\EntityFramework.SqlServer.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.Helpers.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.Mvc.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.Optimization.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.Razor.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.WebPages.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.WebPages.Deployment.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\System.Web.WebPages.Razor.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Newtonsoft.Json.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Antlr3.Runtime.pdb
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.Core.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Facebook.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Cookies.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.OAuth.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Google.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.Twitter.xml
+D:\QuranOntology\QuranOntology\QuranOntology\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\QuranOntology\QuranOntology\QuranOntology\obj\Debug\QuranOntology.dll
+D:\QuranOntology\QuranOntology\QuranOntology\obj\Debug\QuranOntology.pdb

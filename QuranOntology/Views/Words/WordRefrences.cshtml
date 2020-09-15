@@ -1,0 +1,548 @@
+﻿
+@{
+    ViewBag.Title = "WordRefrences";
+}
+@model QuranOntology.Controllers.WordsController.SurahModel
+
+
+
+<style>
+    .nav-tabs {
+        border-bottom: 2px solid #DDD;
+    }
+
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+            border-width: 0;
+        }
+
+        .nav-tabs > li > a {
+            border: none;
+            color: #666;
+        }
+
+            .nav-tabs > li.active > a, .nav-tabs > li > a:hover {
+                border: none;
+                color: #4285F4 !important;
+                background: transparent;
+            }
+
+            .nav-tabs > li > a::after {
+                content: "";
+                background: #4285F4;
+                height: 2px;
+                position: absolute;
+                width: 100%;
+                left: 0px;
+                bottom: -1px;
+                transition: all 250ms ease 0s;
+                transform: scale(0);
+            }
+
+        .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after {
+            transform: scale(1);
+        }
+
+    .tab-nav > li > a::after {
+        background: #21527d none repeat scroll 0% 0%;
+        color: #fff;
+    }
+
+    .tab-pane {
+        padding: 15px 0;
+    }
+
+    .tab-content {
+        padding: 20px;
+    }
+
+    .card {
+        background: #FFF none repeat scroll 0% 0%;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+        margin-bottom: 30px;
+    }
+
+    body {
+        padding: 50px;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-md-5">
+        <h2>Word Refrences</h2>
+    </div>
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-4 parent-alert">
+
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Nav tabs --><div class="card">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#selectword" aria-controls="home" role="tab" data-toggle="tab">Check Word Refrences</a></li>
+                    <li role="presentation"><a href="#addWord" aria-controls="profile" role="tab" data-toggle="tab">Add New Word</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="selectword">
+
+                      
+
+                        <div class="form-group">
+                            <select class="selectpicker" data-live-search="true" title="Choose Word..." id="WordSelect" onchange="getWordRefrences()"></select>
+                        </div>
+
+
+
+
+                        <div class="row collapse" id="custom-collapse">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Word Refrences</div>
+                                <div class="panel-body">
+
+
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <!-- Nav tabs --><div class="card">
+                                                    <ul class="nav nav-tabs" role="tablist">
+                                                        <li role="presentation" class="active"><a href="#wordRefs" aria-controls="home" role="tab" data-toggle="tab">Word Refrences</a></li>
+                                                        <li role="presentation"><a href="#verseRefs" aria-controls="profile" role="tab" data-toggle="tab">Verse Refrences</a></li>
+                                                    </ul>
+                                                    <!-- Tab panes -->
+                                                    <div class="tab-content">
+                                                        <div role="tabpanel" class="tab-pane active" id="wordRefs">
+
+
+
+                                                            <table class="table table-bordered table-hover table-condensed" id="WordRefWords">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Word</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+
+                                                            </table>
+
+
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">Add Word</div>
+                                                                <div class="panel-body">
+
+                                                                    <div class="form-group">
+                                                                        <select class="selectpicker" data-live-search="true" title="Choose Word..." id="WordSelect2"></select>
+                                                                        <input type="button" class="btn btn-primary" onclick="addWordRefrence()" value="Add Word">
+                                                                    </div>
+
+
+                                                                </div>
+
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                        <div role="tabpanel" class="tab-pane" id="verseRefs">
+
+
+
+
+
+
+                                                            <table class="table table-bordered table-hover table-condensed" id="WordRefVerses">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Surah #</td>
+                                                                        <td>Ayat #</td>
+                                                                        <td>Ayat</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+
+                                                            </table>
+
+
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">Add Verse</div>
+                                                                <div class="panel-body">
+
+
+
+
+
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-5 col-md-offset-1">
+                                                                            <div class="form-group">
+                                                                                <label>
+                                                                                    @Html.DisplayNameFor(model => model.surah_numbers):
+                                                                                </label>
+                                                                                @Html.DropDownList("Sura2", Model.surah_numbers as List<SelectListItem>, new { style = "width:250px", @class = "form-control" })
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <label>
+                                                                                    Select Verse Number:
+                                                                                </label>
+                                                                                @Html.DropDownList("Verse2", new SelectList(string.Empty, "Value", "Text"), "Select", new { style = "width:250px", @class = "form-control" })
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row collapse" id="custom-collapse2">
+
+                                                                        <table class="table table-bordered table-hover table-condensed" id="AyatText2">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <td>Arbi</td>
+                                                                                    <td>Urdu</td>
+                                                                                    <td>English</td>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody></tbody>
+
+                                                                        </table>
+
+
+
+                                                                        <div class="row" style="text-align:center">
+                                                                            <input type="button" class="btn btn-primary" onclick="addVerseRefrence()" value="Add this Ayat as a Refrence">
+                                                                        </div>
+
+                                                                    </div>
+
+
+
+
+
+
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="addWord">
+                      
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="display: inline-block;" placeholder="Word Text" id="wordText">
+                            <input type="button" class="btn btn-primary" onclick="saveWord()" value="Add Word">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+      
+
+
+
+        <script>
+
+            $(document).ready(function () {
+
+                getwords();
+
+                getVerses2();
+
+                $("#Sura2").change(function () {
+                    getVerses2();
+                    return false;
+                })
+
+                $("#Verse2").change(function () {
+                    getAyatText2();
+                    return false;
+                })
+
+            });
+
+            function getWordRefrences() {
+
+                if ($("#WordSelect").val() == "") {
+                    $('#custom-collapse').collapse("hide");
+                    return;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("getWordData")',
+                    dataType: 'json',
+                    data: { wordId: $("#WordSelect").val() },
+                    success: function (wordData) {
+
+                        $("#WordRefWords > tbody").empty();
+
+                        if (wordData.word_refs.length == 0) {
+                            $("#WordRefWords > tbody").append('<tr><td style="text-align:center" colspan="2">No Word Refrences For This Word</td></tr>');
+                        }
+
+                        $.each(wordData.word_refs, function (i, word) {
+
+                            $("#WordRefWords > tbody").append('<tr><td>' + word.wordText + '</td>\
+                            <td><input type="button" class="btn btn-danger" value="DELETE" onclick="DeleteWord(' + word.refrenceID + ')"></td>\
+                            </tr>');
+
+                        });
+
+
+                        $("#WordRefVerses > tbody").empty();
+
+                        if (wordData.verse_refs.length == 0) {
+                            $("#WordRefVerses > tbody").append('<tr><td style="text-align:center" colspan="4">No Verse Refrences For This Word</td></tr>');
+                        }
+
+                        $.each(wordData.verse_refs, function (i, verse) {
+
+                            $("#WordRefVerses > tbody").append('<tr><td>' + verse.suraID + '</td>\
+                            <td>' + verse.ayatID + '</td>\
+                            <td>' + verse.ayatText + '</td>\
+                            <td><input type="button" class="btn btn-danger" value="DELETE" onclick="DeleteWord(' + verse.refrenceID + ')"></td>\
+                            </tr>');
+
+                        });
+
+
+                        $('#custom-collapse').collapse("show");
+
+                    },
+                    error: function (ex) {
+                        alert('Failed to get Word Data:' + ex);
+                        $('#custom-collapse').collapse("hide");
+                    }
+
+                });
+            }
+
+            function saveWord() {
+
+                if ($("#wordText").val() == "")
+                    return;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("saveIndivisual")',
+                    dataType: 'json',
+                    data: { wordText: $("#wordText").val() },
+                    success: function (status) {
+                        getwords();
+                        $("#wordText").val("");
+                        $('.parent-alert').append("<div class='alert alert-success alert-dismissable fade in'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Word Saved Successfully.</div>");
+                    },
+                    error: function (ex) {
+                        alert('Failed to Save Word:' + ex);
+                        getwords();
+                    }
+
+                });
+
+            }
+
+            function getwords() {
+
+
+                $("#WordSelect").empty();
+                $("#WordSelect2").empty();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetWordsList")',
+                    dataType: 'json',
+                    data: {},
+                    success: function (results) {
+
+                        $.each(results, function (i, state) {
+                            $("#WordSelect").append('<option value="' + state.Value + '">' +
+                             state.Text + '</option>');
+                            $("#WordSelect2").append('<option value="' + state.Value + '">' +
+                             state.Text + '</option>');
+                        });
+
+                        $('#WordSelect').dropdown();
+                        $('#WordSelect2').dropdown();
+                        $('.selectpicker').selectpicker('refresh');
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Words :' + ex);
+                    }
+
+                });
+
+            }
+
+            function getVerses2() {
+                $("#Verse2").empty();
+                $("#AyatText2 > tbody").empty();
+                $("#custom-collapse2").collapse('hide');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetVerses")',
+                    dataType: 'json',
+                    data: { id: $("#Sura2").val() },
+                    success: function (states) {
+                        $("#Verse2").append('<option value="-1">Select Verse #</option>');
+                        $.each(states, function (i, state) {
+                            $("#Verse2").append('<option value="' + state.Value + '">' +
+                             state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Verses :' + ex);
+                    }
+
+                });
+            }
+
+            function getAyatText2() {
+
+                if ($("#Verse2").val() == "-1") {
+                    $("#custom-collapse2").collapse('hide');
+                    return;
+                }
+
+
+                $("#AyatText2 > tbody").empty();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetAyatText")',
+                    dataType: 'json',
+                    data: { surahID: $("#Sura2").val(), AyahID: $("#Verse2").val() },
+                    success: function (ayatData) {
+
+                        $("#AyatText2 > tbody").append('<tr><td>' + ayatData.ayatText.arbi + '</td>\
+                            <td>' + ayatData.ayatText.urdu + '</td>\
+                            <td>' + ayatData.ayatText.english + '</td>\
+                            </tr>');
+
+
+                        $('#custom-collapse2').collapse("show");
+
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Ayat Text:' + ex);
+                        $('#custom-collapse2').collapse("hide");
+                    }
+
+                });
+            }
+
+
+
+
+            function addWordRefrence() {
+
+                if ($("#WordSelect2").val() == "")
+                    return;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("addWordRefrence")',
+                    dataType: 'json',
+                    data: { main_word_id: $("#WordSelect").val(), word_id: $("#WordSelect2").val() },
+                    success: function (status) {
+
+                        $("#WordSelect2").val("");
+                        getWordRefrences();
+
+
+                    },
+                    error: function (ex) {
+                        alert('Failed to Save Refrence:' + ex);
+
+                    }
+
+                });
+
+            }
+
+
+
+            function addVerseRefrence() {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("addVerseRefrence")',
+                    dataType: 'json',
+                    data: { word_id: $("#WordSelect").val(), surahID: $("#Sura2").val(), AyahID: $("#Verse2").val() },
+                    success: function (status) {
+
+                        
+                        $("#Sura2")[0].selectedIndex = 0;
+
+                        getVerses2();
+                        getWordRefrences();
+
+
+                    },
+                    error: function (ex) {
+                        alert('Failed to Save Refrence:' + ex);
+                       
+                    }
+
+                });
+
+            }
+
+            function DeleteWord(refrence_id) {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("DeleteWord")',
+                    dataType: 'json',
+                    data: { id: refrence_id },
+                    success: function (status) {
+                        getWordRefrences();
+                    },
+                    error: function (ex) {
+                        alert('Failed to Delete Word:' + ex);
+                        getWordRefrences();
+                    }
+
+                });
+
+            }
+
+        </script>

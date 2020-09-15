@@ -1,0 +1,334 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model QuranOntology.Controllers.QuranCRUDController.SurahModel
+
+<h2>Add Refrence</h2>
+
+<div class="row">
+    <div class="col-md-5 col-md-offset-1">
+        <div class="form-group">
+            <label>
+                @Html.DisplayNameFor(model => model.surah_numbers):
+            </label>
+            @Html.DropDownList("Sura", Model.surah_numbers as List<SelectListItem>, new { style = "width:250px", @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="form-group">
+            <label>
+                Select Verse Number:
+            </label>
+            @Html.DropDownList("Verse", new SelectList(string.Empty, "Value", "Text"), "Select", new { style = "width:250px", @class = "form-control" })
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row collapse" id="custom-collapse">
+
+<table class="table table-bordered table-hover table-condensed" id="AyatText">
+    <thead>
+        <tr>
+            <td>Arbi</td>
+            <td>Urdu</td>
+            <td>English</td>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+
+    </table>
+    
+    <h3>Refrences</h3>
+
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Add Refrence</div>
+        <div class="panel-body">
+        
+
+
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <div class="form-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.surah_numbers):
+                        </label>
+                        @Html.DropDownList("Sura2", Model.surah_numbers as List<SelectListItem>, new { style = "width:250px", @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>
+                            Select Verse Number:
+                        </label>
+                        @Html.DropDownList("Verse2", new SelectList(string.Empty, "Value", "Text"), "Select", new { style = "width:250px", @class = "form-control" })
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row collapse" id="custom-collapse2">
+
+                <table class="table table-bordered table-hover table-condensed" id="AyatText2">
+                    <thead>
+                        <tr>
+                            <td>Arbi</td>
+                            <td>Urdu</td>
+                            <td>English</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+
+                </table>
+
+                
+
+                <div class="row" style="text-align:center">
+                    <input type="button" class="btn btn-primary" onclick="saveRefrence()" value="Add this Ayat as a Refrence">
+                </div>
+
+                </div>
+
+              
+
+            </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-condensed" id="Refrences">
+        <thead>
+            <tr>
+                <td>Surah #</td>
+                <td>Ayat #</td>
+                <td>Ayat</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+
+    </table>
+        
+
+    
+
+    </div>
+
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                getVerses();
+
+                $("#Sura").change(function () {
+                    getVerses();
+                    return false;
+                })
+
+                $("#Verse").change(function () {                   
+                    getAyatText();
+                    return false;
+                })
+               
+
+                getVerses2();
+
+                $("#Sura2").change(function () {
+                    getVerses2();
+                    return false;
+                })
+
+                $("#Verse2").change(function () {
+                    getAyatText2();
+                    return false;
+                })
+
+
+            });
+
+            function getVerses() {
+
+                $("#Verse").empty();
+                $("#AyatText > tbody").empty();
+                $("#custom-collapse").collapse('hide');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetVerses")',
+                    dataType: 'json',
+                    data: { id: $("#Sura").val() },
+                    success: function (states) {
+                        $("#Verse").append('<option value="-1">Select Verse #</option>');
+                        $.each(states, function (i, state) {
+                            $("#Verse").append('<option value="' + state.Value + '">' +
+                             state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Verses :' + ex);
+                    }
+
+                });
+            }
+
+            function getAyatText() {
+
+                if ($("#Verse").val() == "-1")
+                {
+                    $("#custom-collapse").collapse('hide');
+                    return;
+                }
+           
+                  
+                $("#AyatText > tbody").empty();
+                $("#Refrences > tbody").empty();
+                
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("GetAyatText")',
+                        dataType: 'json',
+                        data: { surahID: $("#Sura").val(), AyahID: $("#Verse").val() },
+                        success: function (ayatData) {
+
+                            $("#AyatText > tbody").append('<tr><td>' + ayatData.ayatText.arbi + '</td>\
+                            <td>' + ayatData.ayatText.urdu + '</td>\
+                            <td>' + ayatData.ayatText.english + '</td>\
+                            </tr>');
+
+                            if (ayatData.ayatRefrences.length == 0)
+                            {
+                                $("#Refrences > tbody").append('<tr><td style="text-align:center" colspan="4">No Refrences For This Ayat</td></tr>');
+                            }
+
+                            $.each(ayatData.ayatRefrences, function (i, refrence) {
+
+                                $("#Refrences > tbody").append('<tr><td>' + refrence.surahID + '</td>\
+                            <td>' + refrence.ayahID + '</td>\
+                            <td>' + refrence.AyatText + '</td>\
+                            <td><input type="button" class="btn btn-danger" value="DELETE" onclick="DeleteRefrence(' + refrence.refrenceID + ')"></td>\
+                            </tr>');
+
+                            });
+
+
+                                $('#custom-collapse').collapse("show");
+                          
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve Ayat Text:' + ex);
+                            $('#custom-collapse').collapse("hide");
+                        }
+
+                    });                
+            }
+
+
+
+            function getVerses2() {
+                $("#Verse2").empty();
+                $("#AyatText2 > tbody").empty();
+                $("#custom-collapse2").collapse('hide');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetVerses")',
+                    dataType: 'json',
+                    data: { id: $("#Sura2").val() },
+                    success: function (states) {
+                        $("#Verse2").append('<option value="-1">Select Verse #</option>');
+                        $.each(states, function (i, state) {
+                            $("#Verse2").append('<option value="' + state.Value + '">' +
+                             state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Verses :' + ex);
+                    }
+
+                });
+            }
+
+            function getAyatText2() {
+
+                if ($("#Verse2").val() == "-1") {
+                    $("#custom-collapse2").collapse('hide');
+                    return;
+                }
+
+
+                $("#AyatText2 > tbody").empty();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetAyatText")',
+                    dataType: 'json',
+                    data: { surahID: $("#Sura2").val(), AyahID: $("#Verse2").val() },
+                    success: function (ayatData) {
+
+                        $("#AyatText2 > tbody").append('<tr><td>' + ayatData.ayatText.arbi + '</td>\
+                            <td>' + ayatData.ayatText.urdu + '</td>\
+                            <td>' + ayatData.ayatText.english + '</td>\
+                            </tr>');
+
+
+                        $('#custom-collapse2').collapse("show");
+
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Ayat Text:' + ex);
+                        $('#custom-collapse2').collapse("hide");
+                    }
+
+                });
+            }
+
+            function saveRefrence() {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("saveRefrence")',
+                    dataType: 'json',
+                    data: { mainSurahID: $("#Sura").val(), mainAyatID: $("#Verse").val(), surahID: $("#Sura2").val(), AyahID: $("#Verse2").val() },
+                    success: function (status) {
+
+                        getAyatText();
+                        $("#Sura2")[0].selectedIndex = 0;
+                        getVerses2();
+
+
+                    },
+                    error: function (ex) {
+                        alert('Failed to Save Refrence:' + ex);
+                        getAyatText();
+                    }
+
+                });
+
+            }
+
+            function DeleteRefrence(ref_id)
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("DeleteRefrence")',
+                    dataType: 'json',
+                    data: { id : ref_id },
+                    success: function (status) {                        
+                        getAyatText(); 
+                    },
+                    error: function (ex) {
+                        alert('Failed to Delete Refrence:' + ex);
+                        getAyatText();
+                    }
+
+                });
+                
+            }
+
+        </script>

@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuranDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="QuranDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Ontologies" EntityType="QuranDBModel.Ontology" />
+    <EntitySet Name="Refrences" EntityType="QuranDBModel.Refrence" />
+    <AssociationSet Name="FK_Refrences_Ontologies" Association="QuranDBModel.FK_Refrences_Ontologies">
+      <End Role="Ontology" EntitySet="Ontologies" />
+      <End Role="Refrence" EntitySet="Refrences" />
+    </AssociationSet>
+    <EntitySet Name="Qurans" EntityType="QuranDBModel.Quran" />
+    <AssociationSet Name="FK_quran_ontology_composite" Association="QuranDBModel.FK_quran_ontology_composite">
+      <End Role="Quran" EntitySet="Qurans" />
+      <End Role="Ontology" EntitySet="Ontologies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quran_Refrences_composite" Association="QuranDBModel.FK_Quran_Refrences_composite">
+      <End Role="Quran" EntitySet="Qurans" />
+      <End Role="Refrence" EntitySet="Refrences" />
+    </AssociationSet>
+    <EntitySet Name="QuranTranslationByAhmedAlis" EntityType="QuranDBModel.QuranTranslationByAhmedAli" />
+    <EntitySet Name="QuranUrduByJalandhris" EntityType="QuranDBModel.QuranUrduByJalandhri" />
+    <AssociationSet Name="FK_QuranTranslationByAhmedAli__Quran_composite" Association="QuranDBModel.FK_QuranTranslationByAhmedAli__Quran_composite">
+      <End Role="Quran" EntitySet="Qurans" />
+      <End Role="QuranTranslationByAhmedAli" EntitySet="QuranTranslationByAhmedAlis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuranUrduByJalandhri_Quran_composite" Association="QuranDBModel.FK_QuranUrduByJalandhri_Quran_composite">
+      <End Role="Quran" EntitySet="Qurans" />
+      <End Role="QuranUrduByJalandhri" EntitySet="QuranUrduByJalandhris" />
+    </AssociationSet>
+    <EntitySet Name="NounVerbs" EntityType="QuranDBModel.NounVerb" />
+    <EntitySet Name="WordRefrences" EntityType="QuranDBModel.WordRefrence" />
+    <AssociationSet Name="FK_WordRefrences_NounVerb" Association="QuranDBModel.FK_WordRefrences_NounVerb">
+      <End Role="NounVerb" EntitySet="NounVerbs" />
+      <End Role="WordRefrence" EntitySet="WordRefrences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WordRefrences_NounVerb1" Association="QuranDBModel.FK_WordRefrences_NounVerb1">
+      <End Role="NounVerb" EntitySet="NounVerbs" />
+      <End Role="WordRefrence" EntitySet="WordRefrences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WordRefrences_Quran" Association="QuranDBModel.FK_WordRefrences_Quran">
+      <End Role="Quran" EntitySet="Qurans" />
+      <End Role="WordRefrence" EntitySet="WordRefrences" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Ontology">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SuraID" Type="Byte" Nullable="false" />
+    <Property Name="VerseID" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Refrences" Relationship="QuranDBModel.FK_Refrences_Ontologies" FromRole="Ontology" ToRole="Refrence" />
+    <NavigationProperty Name="Quran" Relationship="QuranDBModel.FK_quran_ontology_composite" FromRole="Ontology" ToRole="Quran" />
+  </EntityType>
+  <EntityType Name="Refrence">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SuraID" Type="Byte" Nullable="false" />
+    <Property Name="VerseID" Type="Int16" Nullable="false" />
+    <Property Name="OntologiesID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Ontology" Relationship="QuranDBModel.FK_Refrences_Ontologies" FromRole="Refrence" ToRole="Ontology" />
+    <NavigationProperty Name="Quran" Relationship="QuranDBModel.FK_Quran_Refrences_composite" FromRole="Refrence" ToRole="Quran" />
+  </EntityType>
+  <Association Name="FK_Refrences_Ontologies">
+    <End Type="QuranDBModel.Ontology" Role="Ontology" Multiplicity="1" />
+    <End Type="QuranDBModel.Refrence" Role="Refrence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ontology">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Refrence">
+        <PropertyRef Name="OntologiesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Quran">
+    <Key>
+      <PropertyRef Name="SuraID" />
+      <PropertyRef Name="VerseID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DatabaseID" Type="Byte" Nullable="false" />
+    <Property Name="SuraID" Type="Byte" Nullable="false" />
+    <Property Name="VerseID" Type="Int16" Nullable="false" />
+    <Property Name="AyahText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Ontologies" Relationship="QuranDBModel.FK_quran_ontology_composite" FromRole="Quran" ToRole="Ontology" />
+    <NavigationProperty Name="Refrences" Relationship="QuranDBModel.FK_Quran_Refrences_composite" FromRole="Quran" ToRole="Refrence" />
+    <NavigationProperty Name="QuranTranslationByAhmedAlis" Relationship="QuranDBModel.FK_QuranTranslationByAhmedAli__Quran_composite" FromRole="Quran" ToRole="QuranTranslationByAhmedAli" />
+    <NavigationProperty Name="QuranUrduByJalandhris" Relationship="QuranDBModel.FK_QuranUrduByJalandhri_Quran_composite" FromRole="Quran" ToRole="QuranUrduByJalandhri" />
+    <NavigationProperty Name="WordRefrences" Relationship="QuranDBModel.FK_WordRefrences_Quran" FromRole="Quran" ToRole="WordRefrence" />
+  </EntityType>
+  <Association Name="FK_quran_ontology_composite">
+    <End Type="QuranDBModel.Quran" Role="Quran" Multiplicity="1" />
+    <End Type="QuranDBModel.Ontology" Role="Ontology" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quran">
+        <PropertyRef Name="SuraID" />
+        <PropertyRef Name="VerseID" />
+      </Principal>
+      <Dependent Role="Ontology">
+        <PropertyRef Name="SuraID" />
+        <PropertyRef Name="VerseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quran_Refrences_composite">
+    <End Type="QuranDBModel.Quran" Role="Quran" Multiplicity="1" />
+    <End Type="QuranDBModel.Refrence" Role="Refrence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quran">
+        <PropertyRef Name="SuraID" />
+        <PropertyRef Name="VerseID" />
+      </Principal>
+      <Dependent Role="Refrence">
+        <PropertyRef Name="SuraID" />
+        <PropertyRef Name="VerseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="QuranTranslationByAhmedAli">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DatabaseID" Type="Byte" Nullable="false" />
+    <Property Name="SuraID" Type="Byte" Nullable="false" />
+    <Property Name="VerseID" Type="Int16" Nullable="false" />
+    <Property Name="AyahText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Quran" Relationship="QuranDBModel.FK_QuranTranslationByAhmedAli__Quran_composite" FromRole="QuranTranslationByAhmedAli" ToRole="Quran" />
+  </EntityType>
+  <EntityType Name="QuranUrduByJalandhri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DatabaseID" Type="Byte" Nullable="false" />
+    <Property Name="SuraID" Type="Byte" Nullable="false" />
+    <Property Name="VerseID" Type="Int16" Nullable="false" />
+    <Property Name="AyahText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Quran" Relationship="QuranDBModel.FK_QuranUrduByJalandhri_Quran_composite" FromRole="QuranUrduByJalandhri" ToRole="Quran" />
+  </EntityType>
+  <Association Name="FK_QuranTranslationByAhmedAli__Quran_composite">
+    <End Type="QuranDBModel.Quran" Role="Quran" Multiplicity="1" />
+    <End Type="QuranDBModel.QuranTranslationByAhmedAli" Role="QuranTranslationByAhmedAli" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quran">
+        <PropertyRef Name="SuraID" />
+        <PropertyRef Name="VerseID" />
+      </Principal>
+      <Dependent Role="QuranTranslationByAhmedAli">
+        <PropertyRef Name="SuraID" />
+        <PropertyRef Name="VerseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuranUrduByJalandhri_Quran_composite">
+    <End Type="QuranDBModel.Quran" Role="Quran" Multiplicity="1" />
+    <End Type="QuranDBModel.QuranUrduByJalandhri" Role="QuranUrduByJalandhri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quran">
+        <PropertyRef Name="SuraID" />
+        <PropertyRef Name="VerseID" />
+      </Principal>
+      <Dependent Role="QuranUrduByJalandhri">
+        <PropertyRef Name="SuraID" />
+        <PropertyRef Name="VerseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="NounVerb">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NounVerbText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WordRefrences" Relationship="QuranDBModel.FK_WordRefrences_NounVerb" FromRole="NounVerb" ToRole="WordRefrence" />
+    <NavigationProperty Name="WordRefrences1" Relationship="QuranDBModel.FK_WordRefrences_NounVerb1" FromRole="NounVerb" ToRole="WordRefrence" />
+  </EntityType>
+  <EntityType Name="WordRefrence">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NounVerbID" Type="Int64" />
+    <Property Name="NounVerbRefrenceID" Type="Int64" />
+    <Property Name="RefrenceSuraID" Type="Byte" />
+    <Property Name="RefrenceVerseID" Type="Int16" />
+    <NavigationProperty Name="NounVerb" Relationship="QuranDBModel.FK_WordRefrences_NounVerb" FromRole="WordRefrence" ToRole="NounVerb" />
+    <NavigationProperty Name="NounVerb1" Relationship="QuranDBModel.FK_WordRefrences_NounVerb1" FromRole="WordRefrence" ToRole="NounVerb" />
+    <NavigationProperty Name="Quran" Relationship="QuranDBModel.FK_WordRefrences_Quran" FromRole="WordRefrence" ToRole="Quran" />
+  </EntityType>
+  <Association Name="FK_WordRefrences_NounVerb">
+    <End Type="QuranDBModel.NounVerb" Role="NounVerb" Multiplicity="0..1" />
+    <End Type="QuranDBModel.WordRefrence" Role="WordRefrence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NounVerb">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WordRefrence">
+        <PropertyRef Name="NounVerbID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WordRefrences_NounVerb1">
+    <End Type="QuranDBModel.NounVerb" Role="NounVerb" Multiplicity="0..1" />
+    <End Type="QuranDBModel.WordRefrence" Role="WordRefrence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NounVerb">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WordRefrence">
+        <PropertyRef Name="NounVerbRefrenceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WordRefrences_Quran">
+    <End Type="QuranDBModel.Quran" Role="Quran" Multiplicity="0..1" />
+    <End Type="QuranDBModel.WordRefrence" Role="WordRefrence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quran">
+        <PropertyRef Name="SuraID" />
+        <PropertyRef Name="VerseID" />
+      </Principal>
+      <Dependent Role="WordRefrence">
+        <PropertyRef Name="RefrenceSuraID" />
+        <PropertyRef Name="RefrenceVerseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

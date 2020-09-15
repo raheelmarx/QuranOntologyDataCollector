@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "SearchEnglish";
+}
+
+<h2>English Search</h2>
+
+
+
+    <div class="form-group">
+
+        <input type="text" placeholder="Search Term" style="display: inline-block;" id="verseSearch" class="form-control" />
+
+        <input type="button" class="btn btn-primary" value="Search" onclick="serarch()">
+
+
+    </div>
+
+<div class="row collapse" id="custom-collapse">
+
+    <table class="table table-bordered table-hover table-condensed" id="SrchResults">
+        <thead>
+            <tr>
+                <td>Sura #</td>
+                <td>Verse #</td>
+                <td>Ayat Text</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+
+    </table>
+
+    </div>
+
+
+
+
+<div id="RefrenceModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ayat Refrences</h4>
+            </div>
+            <div class="modal-body">
+                
+
+                <table class="table table-bordered table-hover table-condensed" id="ayatRefs">
+                    <thead>
+                        <tr>
+                            <td>Sura #</td>
+                            <td>Verse #</td>
+                            <td>Ayat Text</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+    function RefrenceModal(surahid , ayatid)    
+    {
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("ayatRefsOnly")',
+            dataType: 'json',
+            data: { surah: surahid, Ayat: ayatid },
+            success: function (results) {
+
+                $("#ayatRefs > tbody").empty();
+
+                if (results.length == 0) {
+                    $("#ayatRefs > tbody").append('<tr><td style="text-align:center" colspan="3">No Refrences For This Ayat</td></tr>');
+                }
+
+                $.each(results, function (i, ref_list) {
+
+                    $("#ayatRefs > tbody").append('<tr><td>' + ref_list.surahID + '</td>\
+                            <td>' + ref_list.ayahID + '</td>\
+                            <td>' + ref_list.AyatText + '</td>\
+                            </tr>');
+                });
+
+
+                $('#RefrenceModal').modal('show');
+
+            },
+            error: function (ex) {
+                alert('Failed to get Refrences:' + ex);
+            }
+
+        });
+
+      
+    }
+
+    function serarch() {
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("VerseSearch")',
+            dataType: 'json',
+            data: { term: $("#verseSearch").val() },
+            success: function (results) {
+
+                $("#SrchResults > tbody").empty();
+
+                $.each(results, function (i, rec) {
+
+                    $("#SrchResults > tbody").append('<tr><td>' + rec.suranumber + '</td>\
+                            <td>' + rec.ayatnumber + '</td>\
+                            <td>' + rec.ayatText + '</td>\
+                            <td><input type="button" value="Refrences" class="btn btn-info" onclick="RefrenceModal(' + rec.suranumber + ' , ' + rec.ayatnumber + ')"></td>\
+                            </tr>');
+                });
+
+                $('#custom-collapse').collapse("show");
+
+            },
+            error: function (ex) {
+                alert('Failed to Search :' + ex);
+                $('#custom-collapse').collapse("hide");
+            }
+
+        });
+
+    }
+
+</script>

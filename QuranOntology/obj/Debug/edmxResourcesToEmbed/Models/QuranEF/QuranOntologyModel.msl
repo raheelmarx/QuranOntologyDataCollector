@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QuranDBModelStoreContainer" CdmEntityContainer="QuranDBEntities">
+    <EntitySetMapping Name="Ontologies">
+      <EntityTypeMapping TypeName="QuranDBModel.Ontology">
+        <MappingFragment StoreEntitySet="Ontologies">
+          <ScalarProperty Name="VerseID" ColumnName="VerseID" />
+          <ScalarProperty Name="SuraID" ColumnName="SuraID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Refrences">
+      <EntityTypeMapping TypeName="QuranDBModel.Refrence">
+        <MappingFragment StoreEntitySet="Refrences">
+          <ScalarProperty Name="OntologiesID" ColumnName="OntologiesID" />
+          <ScalarProperty Name="VerseID" ColumnName="VerseID" />
+          <ScalarProperty Name="SuraID" ColumnName="SuraID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Qurans">
+      <EntityTypeMapping TypeName="QuranDBModel.Quran">
+        <MappingFragment StoreEntitySet="Quran">
+          <ScalarProperty Name="AyahText" ColumnName="AyahText" />
+          <ScalarProperty Name="VerseID" ColumnName="VerseID" />
+          <ScalarProperty Name="SuraID" ColumnName="SuraID" />
+          <ScalarProperty Name="DatabaseID" ColumnName="DatabaseID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuranTranslationByAhmedAlis">
+      <EntityTypeMapping TypeName="QuranDBModel.QuranTranslationByAhmedAli">
+        <MappingFragment StoreEntitySet="QuranTranslationByAhmedAli">
+          <ScalarProperty Name="AyahText" ColumnName="AyahText" />
+          <ScalarProperty Name="VerseID" ColumnName="VerseID" />
+          <ScalarProperty Name="SuraID" ColumnName="SuraID" />
+          <ScalarProperty Name="DatabaseID" ColumnName="DatabaseID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuranUrduByJalandhris">
+      <EntityTypeMapping TypeName="QuranDBModel.QuranUrduByJalandhri">
+        <MappingFragment StoreEntitySet="QuranUrduByJalandhri">
+          <ScalarProperty Name="AyahText" ColumnName="AyahText" />
+          <ScalarProperty Name="VerseID" ColumnName="VerseID" />
+          <ScalarProperty Name="SuraID" ColumnName="SuraID" />
+          <ScalarProperty Name="DatabaseID" ColumnName="DatabaseID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NounVerbs">
+      <EntityTypeMapping TypeName="QuranDBModel.NounVerb">
+        <MappingFragment StoreEntitySet="NounVerb">
+          <ScalarProperty Name="NounVerbText" ColumnName="NounVerbText" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WordRefrences">
+      <EntityTypeMapping TypeName="QuranDBModel.WordRefrence">
+        <MappingFragment StoreEntitySet="WordRefrences">
+          <ScalarProperty Name="RefrenceVerseID" ColumnName="RefrenceVerseID" />
+          <ScalarProperty Name="RefrenceSuraID" ColumnName="RefrenceSuraID" />
+          <ScalarProperty Name="NounVerbRefrenceID" ColumnName="NounVerbRefrenceID" />
+          <ScalarProperty Name="NounVerbID" ColumnName="NounVerbID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

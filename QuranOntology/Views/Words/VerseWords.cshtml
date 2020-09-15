@@ -1,0 +1,328 @@
+﻿
+@{
+    ViewBag.Title = "VerseWords";
+}
+@model QuranOntology.Controllers.WordsController.SurahModel
+
+
+<style>
+    .nav-tabs { border-bottom: 2px solid #DDD; }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+    .nav-tabs > li > a { border: none; color: #666; }
+        .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #4285F4 !important; background: transparent; }
+        .nav-tabs > li > a::after { content: ""; background: #4285F4; height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+    .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+.tab-nav > li > a::after { background: #21527d none repeat scroll 0% 0%; color: #fff; }
+.tab-pane { padding: 15px 0; }
+.tab-content{padding:20px}
+
+.card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); margin-bottom: 30px; }
+body{padding:50px}
+    </style>
+
+
+
+<h2>Verse Words</h2>
+
+<div class="row">
+    <div class="col-md-5 col-md-offset-1">
+        <div class="form-group">
+            <label>
+                @Html.DisplayNameFor(model => model.surah_numbers):
+            </label>
+            @Html.DropDownList("Sura", Model.surah_numbers as List<SelectListItem>, new { style = "width:250px", @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="form-group">
+            <label>
+                Select Verse Number:
+            </label>
+            @Html.DropDownList("Verse", new SelectList(string.Empty, "Value", "Text"), "Select", new { style = "width:250px", @class = "form-control" })
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row collapse" id="custom-collapse">
+
+   
+
+    
+
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Verse Details</div>
+        <div class="panel-body">
+
+
+
+            <table class="table table-bordered table-hover table-condensed" id="AyatText">
+                <thead>
+                    <tr>
+                        <td>Arbi</td>
+                        <td>Urdu</td>
+                        <td>English</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+
+            </table>
+
+            <h3>Words</h3>
+
+            <table class="table table-bordered table-hover table-condensed" id="AyatWords">
+                <thead>
+                    <tr>
+                        <td>Word</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+
+            </table>
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Nav tabs --><div class="card">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#selectword" aria-controls="home" role="tab" data-toggle="tab">Select Word</a></li>
+                                <li role="presentation"><a href="#addWord" aria-controls="profile" role="tab" data-toggle="tab">Add New Word</a></li>
+                              </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="selectword">
+
+                                    <select class="selectpicker" data-live-search="true" title="Choose Word..." id="WordSelect"></select>
+                                    <input type="button" class="btn btn-primary" onclick="saveselectWord()" value="Add Word">
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="addWord">
+                                    <input type="text" class="form-control" style="display: inline-block;" placeholder="Word Text" id="wordText">
+                                    <input type="button" class="btn btn-primary" onclick="savenewWord()" value="Add Word">
+
+ </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+
+
+            </div>
+
+
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+            $(document).ready(function () {
+                getVerses();
+                getwords();
+
+                $("#Sura").change(function () {
+                    getVerses();
+                    return false;
+                })
+
+                $("#Verse").change(function () {
+                    getAyatData();
+                    return false;
+                })
+
+
+
+            });
+
+            function getVerses() {
+
+                $("#Verse").empty();
+                $("#AyatText > tbody").empty();
+                $("#custom-collapse").collapse('hide');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetVerses")',
+                    dataType: 'json',
+                    data: { id: $("#Sura").val() },
+                    success: function (states) {
+                        $("#Verse").append('<option value="-1">Select Verse #</option>');
+                        $.each(states, function (i, state) {
+                            $("#Verse").append('<option value="' + state.Value + '">' +
+                             state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Verses :' + ex);
+                    }
+
+                });
+            }
+
+            function getAyatData() {
+
+                if ($("#Verse").val() == "-1")
+                {
+                    $("#custom-collapse").collapse('hide');
+                    return;
+                }
+
+
+                $("#AyatText > tbody").empty();
+                $("#AyatWords > tbody").empty();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("getAyatData")',
+                        dataType: 'json',
+                        data: { surahID: $("#Sura").val(), AyahID: $("#Verse").val() },
+                        success: function (ayatData) {
+
+                            $("#AyatText > tbody").append('<tr><td>' + ayatData.ayatText.arbi + '</td>\
+                            <td>' + ayatData.ayatText.urdu + '</td>\
+                            <td>' + ayatData.ayatText.english + '</td>\
+                            </tr>');
+
+                            if (ayatData.ayatwords.length == 0)
+                            {
+                                $("#AyatWords > tbody").append('<tr><td style="text-align:center" colspan="2">No words For This Ayat</td></tr>');
+                            }
+
+                            $.each(ayatData.ayatwords, function (i, word) {
+
+                                $("#AyatWords > tbody").append('<tr><td>' + word.wordText + '</td>\
+                            <td><input type="button" class="btn btn-danger" value="DELETE" onclick="DeleteWord(' + word.refrenceID + ')"></td>\
+                            </tr>');
+
+                            });
+
+
+                                $('#custom-collapse').collapse("show");
+
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve Ayat Data:' + ex);
+                            $('#custom-collapse').collapse("hide");
+                        }
+
+                    });
+            }
+
+    function saveselectWord() {
+        if ($("#WordSelect").val() != "") {
+        
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("addVerseRefrence")',
+                dataType: 'json',
+                data: { word_id: $("#WordSelect").val(), surahID: $("#Sura").val(), AyahID: $("#Verse").val() },
+                success: function (status) {
+
+
+
+                    getwords();
+                    getAyatData();
+
+
+                },
+                error: function (ex) {
+                    alert('Failed to Save Refrence:' + ex);
+                    getwords();
+                    getAyatData();
+                }
+
+            });
+
+        }
+
+    }
+
+    function savenewWord() {
+
+        if ($("#wordText").val() != "") {
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("saveWord")',
+                dataType: 'json',
+                data: { wordText: $("#wordText").val(), SurahID: $("#Sura").val(), AyatID: $("#Verse").val() },
+                success: function (status) {
+                    $("#wordText").val('');
+                    getwords();
+                    getAyatData();
+                },
+                error: function (ex) {
+                    alert('Failed to Save Refrence:' + ex);
+                    getwords();
+                    getAyatData();
+                }
+
+            });
+
+        }
+
+    }
+
+        
+  
+
+    function getwords() {
+
+
+        $("#WordSelect").empty();
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetWordsList")',
+            dataType: 'json',
+            data: {},
+            success: function (results) {
+
+                $.each(results, function (i, state) {
+                    $("#WordSelect").append('<option value="' + state.Value + '">' +
+                     state.Text + '</option>');
+                });
+
+                $('#WordSelect').dropdown();
+                $('.selectpicker').selectpicker('refresh');
+            },
+            error: function (ex) {
+                alert('Failed to retrieve Words :' + ex);
+            }
+
+        });
+
+    }
+
+             function DeleteWord(refrence_id)
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("DeleteWord")',
+                    dataType: 'json',
+                    data: { id: refrence_id },
+                    success: function (status) {
+                        getAyatData();
+                    },
+                    error: function (ex) {
+                        alert('Failed to Delete Word:' + ex);
+                        getAyatData();
+                    }
+
+                });
+
+            }
+
+</script>
